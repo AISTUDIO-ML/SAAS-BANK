@@ -1,15 +1,13 @@
 # 🧠 SAAS BANK
 
-# 🧠 AI DATA STUDIO
-
-AI DATA STUDIO is a decentralized SaaS platform that enables real-time and time-locked crypto-based subscriptions using **Superfluid** and **Sablier**. Built with a **React frontend** and **Node.js backend**, it supports deployment on **Azure** and **AWS**.
+SAAS BANK is a decentralized SaaS platform that enables real-time and time-locked crypto-based subscriptions using **Superfluid** and **Sablier**. Built with a **React frontend** and **Node.js backend**, it supports deployment on **Azure** and **AWS**.
 
 ---
 
 ## 📁 Project Structure
 
 
-ai-data-studio/ ├── backend/        # Node.js API for stream management and access control ├── frontend/       # React admin dashboard for subscription monitoring ├── .github/        # CI/CD workflows for Azure and AWS
+saas-bank/ ├── backend/        # Node.js API for stream management and access control ├── frontend/       # React admin dashboard for subscription monitoring ├── .github/        # CI/CD workflows for Azure and AWS
 
 ---
 
@@ -40,8 +38,8 @@ ai-data-studio/ ├── backend/        # Node.js API for stream management an
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-org/ai-data-studio.git
-cd ai-data-studio
+git clone https://github.com/your-org/saas-bank.git
+cd saas-bank
 
 2. Environment Variables
 Create .env files in both backend/ and frontend/:
