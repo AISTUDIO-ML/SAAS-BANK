@@ -1,0 +1,24 @@
+{
+    "name": "saas-bank-template",
+    "description": "Template for deploying, managing, and tearing down SAAS BANK infrastructure using GitHub Actions, AWS, and Azure.",
+    "private": false,
+    "tags": [
+        "infrastructure",
+        "automation",
+        "GitHub CLI",
+        "SAAS",
+        "deployment",
+        "sandbox",
+        "monitoring",
+        "alerts",
+        "metrics"
+    ],
+    "usage": {
+        "instructions": [
+            "Clone this template using the 'Use this template' button on GitHub.",
+            "Run `setup.sh` to initialize the repository, branches, and environments.",
+            "Customize deployment scripts and workflows under `deployment/` and `sandbox/`.",
+            "Use `teardown.sh` to safely delete the repository and clean up local files."
+        ]
+    }
+}
