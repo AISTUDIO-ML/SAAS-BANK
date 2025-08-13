@@ -7,6 +7,6 @@ export default function HomePage() {
     <div className="min-h-screen">
       <HeroSection />
       <FeaturesSection />
-    </div>
-  );
+    </div>);
+
 }

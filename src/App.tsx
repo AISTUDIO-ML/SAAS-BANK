@@ -7,6 +7,9 @@ import Footer from "@/components/Footer";
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
+import CryptoSubscriptions from "./pages/CryptoSubscriptions";
+import AdminStreamDashboard from "./pages/AdminStreamDashboard";
+import CryptoIntegrationGuide from "./components/CryptoIntegrationGuide";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +26,9 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/crypto" element={<CryptoSubscriptions />} />
+                <Route path="/admin/streams" element={<AdminStreamDashboard />} />
+                <Route path="/guide" element={<CryptoIntegrationGuide />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
@@ -31,8 +37,8 @@ function App() {
           <Toaster />
         </BrowserRouter>
       </TooltipProvider>
-    </QueryClientProvider>
-  );
+    </QueryClientProvider>);
+
 }
 
 export default App;

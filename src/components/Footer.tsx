@@ -62,8 +62,8 @@ const Footer = () => {
           <p>© 2024 SAAS BANK. Developed with ❤️ by Honeypotz Inc in Greenwich, CT. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 };
 
 export default Footer;

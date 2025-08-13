@@ -7,7 +7,7 @@ import { Wallet, Shield, BarChart3 } from 'lucide-react';
 
 const Header = () => {
   const location = useLocation();
-  
+
   return (
     <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -50,20 +50,44 @@ const Header = () => {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link
+                to="/dashboard"
+                className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+              >
+                Dashboard
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link
+                to="/crypto"
+                className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+              >
+                Crypto Subscriptions
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link
+                to="/guide"
+                className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+              >
+                Integration Guide
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
         <div className="flex items-center space-x-4">
-          <Link 
-            to="/dashboard" 
-            className={`hidden md:inline-flex text-sm ${location.pathname === '/dashboard' ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900'}`}
-          >
+          <Link
+            to="/dashboard"
+            className={`hidden md:inline-flex text-sm ${location.pathname === '/dashboard' ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900'}`}>
+
             Dashboard
           </Link>
-          <Link 
-            to="/admin" 
-            className={`hidden md:inline-flex text-sm ${location.pathname === '/admin' ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900'}`}
-          >
+          <Link
+            to="/admin"
+            className={`hidden md:inline-flex text-sm ${location.pathname === '/admin' ? 'text-blue-600 font-medium' : 'text-gray-600 hover:text-gray-900'}`}>
+
             Admin
           </Link>
           <Button variant="outline" size="sm">
@@ -71,8 +95,8 @@ const Header = () => {
           </Button>
         </div>
       </div>
-    </header>
-  );
+    </header>);
+
 };
 
 export default Header;

@@ -12,52 +12,52 @@ const Admin = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const mockUsers = [
-    {
-      id: '1',
-      email: 'john.doe@example.com',
-      subscriptions: 3,
-      totalSpent: '156.78',
-      status: 'active',
-      lastActivity: '2024-01-15'
-    },
-    {
-      id: '2', 
-      email: 'jane.smith@example.com',
-      subscriptions: 1,
-      totalSpent: '52.99',
-      status: 'active',
-      lastActivity: '2024-01-14'
-    },
-    {
-      id: '3',
-      email: 'bob.wilson@example.com',
-      subscriptions: 2,
-      totalSpent: '89.45',
-      status: 'paused',
-      lastActivity: '2024-01-10'
-    }
-  ];
+  {
+    id: '1',
+    email: 'john.doe@example.com',
+    subscriptions: 3,
+    totalSpent: '156.78',
+    status: 'active',
+    lastActivity: '2024-01-15'
+  },
+  {
+    id: '2',
+    email: 'jane.smith@example.com',
+    subscriptions: 1,
+    totalSpent: '52.99',
+    status: 'active',
+    lastActivity: '2024-01-14'
+  },
+  {
+    id: '3',
+    email: 'bob.wilson@example.com',
+    subscriptions: 2,
+    totalSpent: '89.45',
+    status: 'paused',
+    lastActivity: '2024-01-10'
+  }];
+
 
   const mockStreams = [
-    {
-      id: '1',
-      user: 'john.doe@example.com',
-      service: 'Netflix Premium',
-      type: 'Superfluid',
-      amount: '15.99 USDT/month',
-      status: 'active',
-      created: '2024-01-01'
-    },
-    {
-      id: '2',
-      user: 'jane.smith@example.com', 
-      service: 'Adobe Creative',
-      type: 'Sablier',
-      amount: '52.99 USDT',
-      status: 'locked',
-      created: '2024-01-05'
-    }
-  ];
+  {
+    id: '1',
+    user: 'john.doe@example.com',
+    service: 'Netflix Premium',
+    type: 'Superfluid',
+    amount: '15.99 USDT/month',
+    status: 'active',
+    created: '2024-01-01'
+  },
+  {
+    id: '2',
+    user: 'jane.smith@example.com',
+    service: 'Adobe Creative',
+    type: 'Sablier',
+    amount: '52.99 USDT',
+    status: 'locked',
+    created: '2024-01-05'
+  }];
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -136,8 +136,8 @@ const Admin = () => {
                         placeholder="Search users..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 w-64"
-                      />
+                        className="pl-10 w-64" />
+
                     </div>
                     <Button variant="outline">
                       <Filter className="h-4 w-4 mr-2" />
@@ -159,8 +159,8 @@ const Admin = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {mockUsers.map((user) => (
-                      <TableRow key={user.id}>
+                    {mockUsers.map((user) =>
+                    <TableRow key={user.id}>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>{user.subscriptions}</TableCell>
                         <TableCell>${user.totalSpent} USDT</TableCell>
@@ -174,7 +174,7 @@ const Admin = () => {
                           <Button variant="outline" size="sm">View</Button>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )}
                   </TableBody>
                 </Table>
               </CardContent>
@@ -201,8 +201,8 @@ const Admin = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {mockStreams.map((stream) => (
-                      <TableRow key={stream.id}>
+                    {mockStreams.map((stream) =>
+                    <TableRow key={stream.id}>
                         <TableCell>{stream.user}</TableCell>
                         <TableCell>{stream.service}</TableCell>
                         <TableCell>
@@ -219,7 +219,7 @@ const Admin = () => {
                           <Button variant="outline" size="sm">Monitor</Button>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    )}
                   </TableBody>
                 </Table>
               </CardContent>
@@ -283,8 +283,8 @@ const Admin = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Admin;

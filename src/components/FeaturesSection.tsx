@@ -5,43 +5,43 @@ import { Waves, Clock, Shield, BarChart3, Coins, Users } from 'lucide-react';
 
 const FeaturesSection = () => {
   const features = [
-    {
-      icon: Waves,
-      title: "Superfluid Integration",
-      description: "Real-time money streaming for continuous subscription payments without manual transactions.",
-      gradient: "from-blue-500 to-blue-600"
-    },
-    {
-      icon: Clock,
-      title: "Sablier Time-locks",
-      description: "Secure time-locked payments for scheduled releases and long-term commitments.",
-      gradient: "from-purple-500 to-purple-600"
-    },
-    {
-      icon: Shield,
-      title: "AI Access Control",
-      description: "Intelligent monitoring and automatic access management based on payment streams.",
-      gradient: "from-green-500 to-green-600"
-    },
-    {
-      icon: Coins,
-      title: "USDT Billing",
-      description: "Stable cryptocurrency billing on Ethereum-compatible chains for predictable costs.",
-      gradient: "from-orange-500 to-orange-600"
-    },
-    {
-      icon: BarChart3,
-      title: "Stream Analytics",
-      description: "Real-time monitoring of payment streams with comprehensive dashboards and insights.",
-      gradient: "from-indigo-500 to-indigo-600"
-    },
-    {
-      icon: Users,
-      title: "User Management",
-      description: "Complete admin dashboard for managing users, subscriptions, and payment streams.",
-      gradient: "from-pink-500 to-pink-600"
-    }
-  ];
+  {
+    icon: Waves,
+    title: "Superfluid Integration",
+    description: "Real-time money streaming for continuous subscription payments without manual transactions.",
+    gradient: "from-blue-500 to-blue-600"
+  },
+  {
+    icon: Clock,
+    title: "Sablier Time-locks",
+    description: "Secure time-locked payments for scheduled releases and long-term commitments.",
+    gradient: "from-purple-500 to-purple-600"
+  },
+  {
+    icon: Shield,
+    title: "AI Access Control",
+    description: "Intelligent monitoring and automatic access management based on payment streams.",
+    gradient: "from-green-500 to-green-600"
+  },
+  {
+    icon: Coins,
+    title: "USDT Billing",
+    description: "Stable cryptocurrency billing on Ethereum-compatible chains for predictable costs.",
+    gradient: "from-orange-500 to-orange-600"
+  },
+  {
+    icon: BarChart3,
+    title: "Stream Analytics",
+    description: "Real-time monitoring of payment streams with comprehensive dashboards and insights.",
+    gradient: "from-indigo-500 to-indigo-600"
+  },
+  {
+    icon: Users,
+    title: "User Management",
+    description: "Complete admin dashboard for managing users, subscriptions, and payment streams.",
+    gradient: "from-pink-500 to-pink-600"
+  }];
+
 
   return (
     <section className="py-20 bg-gray-50">
@@ -74,13 +74,13 @@ const FeaturesSection = () => {
                     {feature.description}
                   </CardDescription>
                 </CardContent>
-              </Card>
-            );
+              </Card>);
+
           })}
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default FeaturesSection;

@@ -9,32 +9,32 @@ import { Wallet, TrendingUp, Activity, Plus, DollarSign } from 'lucide-react';
 
 const Dashboard = () => {
   const mockSubscriptions = [
-    {
-      type: 'superfluid' as const,
-      title: 'Netflix Premium',
-      amount: '15.99',
-      token: 'USDT',
-      status: 'active' as const,
-      streamRate: '15.99 USDT'
-    },
-    {
-      type: 'sablier' as const,
-      title: 'Adobe Creative Suite',
-      amount: '52.99',
-      token: 'USDT',
-      status: 'active' as const,
-      progress: 65,
-      endDate: '2024-12-31'
-    },
-    {
-      type: 'superfluid' as const,
-      title: 'Spotify Family',
-      amount: '12.99',
-      token: 'USDT',
-      status: 'paused' as const,
-      streamRate: '12.99 USDT'
-    }
-  ];
+  {
+    type: 'superfluid' as const,
+    title: 'Netflix Premium',
+    amount: '15.99',
+    token: 'USDT',
+    status: 'active' as const,
+    streamRate: '15.99 USDT'
+  },
+  {
+    type: 'sablier' as const,
+    title: 'Adobe Creative Suite',
+    amount: '52.99',
+    token: 'USDT',
+    status: 'active' as const,
+    progress: 65,
+    endDate: '2024-12-31'
+  },
+  {
+    type: 'superfluid' as const,
+    title: 'Spotify Family',
+    amount: '12.99',
+    token: 'USDT',
+    status: 'paused' as const,
+    streamRate: '12.99 USDT'
+  }];
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -108,9 +108,9 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockSubscriptions.map((sub, index) => (
-                <SubscriptionCard key={index} {...sub} />
-              ))}
+              {mockSubscriptions.map((sub, index) =>
+              <SubscriptionCard key={index} {...sub} />
+              )}
             </div>
           </TabsContent>
 
@@ -188,8 +188,8 @@ const Dashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Dashboard;
