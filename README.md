@@ -1,93 +1,89 @@
-# 🧠 SAAS BANK
+# Welcome to your EzSite project
 
-SAAS BANK is a decentralized SaaS platform that enables real-time and time-locked crypto-based subscriptions using **Superfluid** and **Sablier**. Built with a **React frontend** and **Node.js backend**, it supports deployment on **Azure** and **AWS**.
+A clean, modern React template with TypeScript, Vite, TailwindCSS, and ShadCN UI components. This template provides a solid foundation for building web applications with best practices in mind.
 
----
+## Tech Features
 
-## 📁 Project Structure
+- ⚡️ **Vite** - Lightning fast build tool
+- 🔥 **React 18** - Latest React features
+- 🧩 **TypeScript** - Type safety for better developer experience
+- 🎨 **TailwindCSS** - Utility-first CSS framework
+- 🧰 **ShadCN UI** - Accessible and customizable UI components
+- 📱 **Responsive Design** - Mobile-first approach
+- 🧭 **React Router** - Easy client-side routing
+- 🔄 **React Query** - Data fetching and state management
+- 🧪 **Form Handling** - React Hook Form with Zod validation
 
+## Getting Started
 
-saas-bank/ ├── backend/        # Node.js API for stream management and access control ├── frontend/       # React admin dashboard for subscription monitoring ├── .github/        # CI/CD workflows for Azure and AWS
+### Prerequisites
 
----
+- Node.js 18+ 
+- npm or yarn or pnpm
 
-## 🚀 Features
+### Installation
 
-- 🔗 Crypto subscriptions with **Superfluid** (real-time) and **Sablier** (time-locked)
-- 🧾 USDT-based billing on Ethereum-compatible chains
-- 🧠 AI-powered access control and stream monitoring
-- 📊 Admin dashboard to manage users and subscriptions
-- ☁️ CI/CD pipelines for Azure (backend) and AWS (frontend)
+1. Clone this repository:
+```bash
+git clone https://github.com/your-username/react-template-project.git
+cd react-template-project
+```
 
----
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+```
 
-## 🛠️ Tech Stack
+3. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-| Layer       | Technology                     |
-|-------------|--------------------------------|
-| Frontend    | React, Tailwind CSS            |
-| Backend     | Node.js, Express, Ethers.js    |
-| Blockchain  | Superfluid, Sablier, The Graph |
-| Deployment  | Azure App Service, AWS S3      |
-| CI/CD       | GitHub Actions                 |
+4. Open your browser and visit `http://localhost:5173`
 
----
+## Project Structure
 
-## ⚙️ Setup Instructions
+```
+react-template-project/
+├── public/              # Static assets
+│   ├── components/      # Reusable components
+│   │   └── ui/          # UI components from ShadCN
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility functions and libraries
+│   ├── pages/           # Page components
+│   ├── App.tsx          # Main application component
+│   ├── index.css        # Global styles
+│   └── main.tsx         # Application entry point
+├── .gitignore
+├── package.json         # Project dependencies and scripts
+├── tailwind.config.ts   # TailwindCSS configuration
+├── tsconfig.json        # TypeScript configuration
+└── vite.config.ts       # Vite configuration
+```
 
-### 1. Clone the Repo
+## Customization
+
+- **Styling**: Modify `tailwind.config.ts` to customize your design tokens
+- **Components**: Add or modify components in the `src/components` directory
+- **Pages**: Create new pages in the `src/pages` directory
+- **Routing**: Update routes in `src/App.tsx`
+
+## Building for Production
 
 ```bash
-git clone https://github.com/your-org/saas-bank.git
-cd saas-bank
+npm run build
+# or
+yarn build
+# or
+pnpm build
+```
 
-2. Environment Variables
-Create .env files in both backend/ and frontend/:
-backend/.env
-PRIVATE_KEY=your_wallet_private_key
-RPC_URL=https://polygon-rpc.com
-SUPERFLUID_HOST=0x...
-SABLIER_ADDRESS=0x...
-
-frontend/.env
-REACT_APP_API_URL=https://your-backend-url.com
-
-⸻
-🧪 Local Development
-Backend
-cd backend
-npm install
-npm run dev
-
-Frontend
-cd frontend
-npm install
-npm start
-
-⸻
-🚀 Deployment
-Azure (Backend)
-• Configure Azure App Service
-• Add AZURE_PUBLISH_PROFILE to GitHub Secrets
-• Push to main branch to trigger deployment
-AWS (Frontend)
-• Configure S3 bucket and CloudFront
-• Add AWS_S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY to GitHub Secrets
-• Push to main branch to trigger deployment
-⸻
-📊 Admin Dashboard
-• View all users and their subscription status
-• Pause or cancel streams
-• Monitor real-time flow rates and events
-⸻
-📡 Monitoring
-• Uses The Graph to poll Superfluid stream status
-• Optional: Gelato Automate for webhook-based stream event triggers
-⸻
-📄 License
-MIT License © 2025 Honeypotz Inc.
-⸻
-🤝 Contributing
-Pull requests are welcome! For major changes, please open an issue first.
-
----
+The built files will be in the `dist` directory, ready to be deployed.
