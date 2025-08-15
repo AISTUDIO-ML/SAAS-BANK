@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Zap, Lock, Brain } from 'lucide-react';
+import { ArrowRight, Zap, Lock, Brain, CreditCard, BarChart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
@@ -29,13 +29,23 @@ const HeroSection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/dashboard">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button variant="outline" size="lg">
-              View Demo
+            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+              <Link to="/subscriptions">
+                <CreditCard className="mr-2 h-4 w-4" />
+                Traditional Plans
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/crypto-subscriptions">
+                <Zap className="mr-2 h-4 w-4" />
+                Crypto Payments
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/dashboard">
+                <BarChart className="mr-2 h-4 w-4" />
+                Dashboard
+              </Link>
             </Button>
           </div>
           

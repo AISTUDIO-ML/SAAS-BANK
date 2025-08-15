@@ -6,18 +6,18 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  DollarSign, 
-  Users, 
-  Activity, 
-  TrendingUp, 
-  Search, 
+import {
+  DollarSign,
+  Users,
+  Activity,
+  TrendingUp,
+  Search,
   Filter,
   ExternalLink,
   Pause,
   Play,
-  X
-} from 'lucide-react';
+  X } from
+'lucide-react';
 
 const AdminStreamDashboard: React.FC = () => {
   const [subscriptions, setSubscriptions] = useState<any[]>([]);
@@ -29,7 +29,7 @@ const AdminStreamDashboard: React.FC = () => {
     totalRevenue: 0,
     activeSubscribers: 0,
     totalStreams: 0,
-    monthlyGrowth: 0,
+    monthlyGrowth: 0
   });
   const { toast } = useToast();
 
@@ -40,14 +40,14 @@ const AdminStreamDashboard: React.FC = () => {
   const loadDashboardData = async () => {
     try {
       setIsLoading(true);
-      
+
       // Load subscriptions
       const { data: subsData, error: subsError } = await window.ezsite.apis.tablePage(34169, {
         PageNo: 1,
         PageSize: 100,
         OrderByField: 'id',
         IsAsc: false,
-        Filters: [],
+        Filters: []
       });
 
       if (subsError) throw new Error(subsError);
@@ -59,7 +59,7 @@ const AdminStreamDashboard: React.FC = () => {
         PageSize: 100,
         OrderByField: 'id',
         IsAsc: false,
-        Filters: [],
+        Filters: []
       });
 
       if (streamsError) throw new Error(streamsError);
@@ -71,7 +71,7 @@ const AdminStreamDashboard: React.FC = () => {
         PageSize: 50,
         OrderByField: 'id',
         IsAsc: false,
-        Filters: [],
+        Filters: []
       });
 
       if (txError) throw new Error(txError);
@@ -85,7 +85,7 @@ const AdminStreamDashboard: React.FC = () => {
       toast({
         title: 'Load Error',
         description: error.message || 'Failed to load dashboard data',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsLoading(false);
@@ -94,30 +94,30 @@ const AdminStreamDashboard: React.FC = () => {
 
   const calculateStats = (subs: any[], streams: any[]) => {
     const totalRevenue = subs.reduce((sum, sub) => sum + (sub.amount || 0), 0);
-    const activeSubscribers = subs.filter(sub => sub.status === 'active').length;
-    const totalStreams = streams.filter(stream => stream.is_active).length;
-    
+    const activeSubscribers = subs.filter((sub) => sub.status === 'active').length;
+    const totalStreams = streams.filter((stream) => stream.is_active).length;
+
     setStats({
       totalRevenue,
       activeSubscribers,
       totalStreams,
-      monthlyGrowth: 12.5, // Mock growth rate
+      monthlyGrowth: 12.5 // Mock growth rate
     });
   };
 
-  const filteredSubscriptions = subscriptions.filter(sub => 
-    sub.wallet_address?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    sub.plan_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    sub.status?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredSubscriptions = subscriptions.filter((sub) =>
+  sub.wallet_address?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  sub.plan_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  sub.status?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'default';
-      case 'paused': return 'secondary';
-      case 'cancelled': return 'destructive';
-      case 'expired': return 'outline';
-      default: return 'secondary';
+      case 'active':return 'default';
+      case 'paused':return 'secondary';
+      case 'cancelled':return 'destructive';
+      case 'expired':return 'outline';
+      default:return 'secondary';
     }
   };
 
@@ -128,7 +128,7 @@ const AdminStreamDashboard: React.FC = () => {
   const formatAmount = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'USD'
     }).format(amount);
   };
 
@@ -227,8 +227,8 @@ const AdminStreamDashboard: React.FC = () => {
                         placeholder="Search subscriptions..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 w-64"
-                      />
+                        className="pl-10 w-64" />
+
                     </div>
                   </div>
                 </div>
@@ -248,8 +248,8 @@ const AdminStreamDashboard: React.FC = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredSubscriptions.map((sub) => (
-                        <TableRow key={sub.id}>
+                      {filteredSubscriptions.map((sub) =>
+                      <TableRow key={sub.id}>
                           <TableCell className="font-mono">
                             {formatAddress(sub.wallet_address)}
                           </TableCell>
@@ -279,7 +279,7 @@ const AdminStreamDashboard: React.FC = () => {
                             </div>
                           </TableCell>
                         </TableRow>
-                      ))}
+                      )}
                     </TableBody>
                   </Table>
                 </div>
@@ -308,8 +308,8 @@ const AdminStreamDashboard: React.FC = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {paymentStreams.map((stream) => (
-                        <TableRow key={stream.id}>
+                      {paymentStreams.map((stream) =>
+                      <TableRow key={stream.id}>
                           <TableCell className="font-mono">
                             {formatAddress(stream.stream_address)}
                           </TableCell>
@@ -330,7 +330,7 @@ const AdminStreamDashboard: React.FC = () => {
                             {new Date(stream.last_updated).toLocaleDateString()}
                           </TableCell>
                         </TableRow>
-                      ))}
+                      )}
                     </TableBody>
                   </Table>
                 </div>
@@ -358,8 +358,8 @@ const AdminStreamDashboard: React.FC = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {transactions.map((tx) => (
-                        <TableRow key={tx.id}>
+                      {transactions.map((tx) =>
+                      <TableRow key={tx.id}>
                           <TableCell className="font-mono">
                             {formatAddress(tx.transaction_hash)}
                           </TableCell>
@@ -370,9 +370,9 @@ const AdminStreamDashboard: React.FC = () => {
                           <TableCell>{tx.gas_used}</TableCell>
                           <TableCell>
                             <Badge variant={
-                              tx.status === 'confirmed' ? 'default' :
-                              tx.status === 'pending' ? 'secondary' : 'destructive'
-                            }>
+                          tx.status === 'confirmed' ? 'default' :
+                          tx.status === 'pending' ? 'secondary' : 'destructive'
+                          }>
                               {tx.status}
                             </Badge>
                           </TableCell>
@@ -380,7 +380,7 @@ const AdminStreamDashboard: React.FC = () => {
                             {new Date(tx.timestamp).toLocaleString()}
                           </TableCell>
                         </TableRow>
-                      ))}
+                      )}
                     </TableBody>
                   </Table>
                 </div>
@@ -389,8 +389,8 @@ const AdminStreamDashboard: React.FC = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default AdminStreamDashboard;

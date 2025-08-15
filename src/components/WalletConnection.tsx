@@ -23,12 +23,12 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
     137: 'Polygon',
     80001: 'Polygon Mumbai',
     1: 'Ethereum',
-    5: 'Goerli',
+    5: 'Goerli'
   };
 
   useEffect(() => {
     checkWalletConnection();
-    
+
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', handleAccountsChanged);
       window.ethereum.on('chainChanged', handleChainChanged);
@@ -47,17 +47,17 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const accounts = await provider.send('eth_accounts', []);
-        
+
         if (accounts.length > 0) {
           const network = await provider.getNetwork();
           const balance = await provider.getBalance(accounts[0]);
-          
+
           setProvider(provider);
           setWalletAddress(accounts[0]);
           setChainId(Number(network.chainId));
           setBalance(ethers.formatEther(balance));
           setIsConnected(true);
-          
+
           if (onWalletConnect) {
             onWalletConnect(accounts[0], provider);
           }
@@ -73,7 +73,7 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
       toast({
         title: 'MetaMask Required',
         description: 'Please install MetaMask to use this feature.',
-        variant: 'destructive',
+        variant: 'destructive'
       });
       return;
     }
@@ -82,31 +82,31 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const accounts = await provider.send('eth_requestAccounts', []);
-      
+
       if (accounts.length > 0) {
         const network = await provider.getNetwork();
         const balance = await provider.getBalance(accounts[0]);
-        
+
         setProvider(provider);
         setWalletAddress(accounts[0]);
         setChainId(Number(network.chainId));
         setBalance(ethers.formatEther(balance));
         setIsConnected(true);
-        
+
         if (onWalletConnect) {
           onWalletConnect(accounts[0], provider);
         }
-        
+
         toast({
           title: 'Wallet Connected',
-          description: `Connected to ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`,
+          description: `Connected to ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`
         });
       }
     } catch (error: any) {
       toast({
         title: 'Connection Failed',
         description: error.message || 'Failed to connect wallet',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsLoading(false);
@@ -119,10 +119,10 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
     setChainId(0);
     setBalance('0');
     setProvider(null);
-    
+
     toast({
       title: 'Wallet Disconnected',
-      description: 'Your wallet has been disconnected.',
+      description: 'Your wallet has been disconnected.'
     });
   };
 
@@ -142,17 +142,17 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
     navigator.clipboard.writeText(walletAddress);
     toast({
       title: 'Address Copied',
-      description: 'Wallet address copied to clipboard',
+      description: 'Wallet address copied to clipboard'
     });
   };
 
   const switchToPolygon = async () => {
     if (!window.ethereum) return;
-    
+
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x89' }], // Polygon mainnet
+        params: [{ chainId: '0x89' }] // Polygon mainnet
       });
     } catch (error: any) {
       if (error.code === 4902) {
@@ -166,11 +166,11 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
               nativeCurrency: {
                 name: 'MATIC',
                 symbol: 'MATIC',
-                decimals: 18,
+                decimals: 18
               },
               rpcUrls: ['https://polygon-rpc.com/'],
-              blockExplorerUrls: ['https://polygonscan.com/'],
-            }],
+              blockExplorerUrls: ['https://polygonscan.com/']
+            }]
           });
         } catch (addError) {
           console.error('Failed to add network:', addError);
@@ -192,16 +192,16 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
           <div className="text-center text-sm text-muted-foreground">
             Connect your wallet to access crypto subscriptions
           </div>
-          <Button 
-            onClick={connectWallet} 
+          <Button
+            onClick={connectWallet}
             className="w-full"
-            disabled={isLoading}
-          >
+            disabled={isLoading}>
+
             {isLoading ? 'Connecting...' : 'Connect MetaMask'}
           </Button>
         </CardContent>
-      </Card>
-    );
+      </Card>);
+
   }
 
   return (
@@ -231,8 +231,8 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
               <a
                 href={`https://polygonscan.com/address/${walletAddress}`}
                 target="_blank"
-                rel="noopener noreferrer"
-              >
+                rel="noopener noreferrer">
+
                 <ExternalLink className="h-3 w-3" />
               </a>
             </Button>
@@ -246,18 +246,18 @@ const WalletConnection: React.FC<WalletConnectionProps> = ({ onWalletConnect }) 
           </div>
         </div>
 
-        {chainId !== 137 && (
-          <Button onClick={switchToPolygon} variant="outline" className="w-full">
+        {chainId !== 137 &&
+        <Button onClick={switchToPolygon} variant="outline" className="w-full">
             Switch to Polygon
           </Button>
-        )}
+        }
         
         <Button onClick={disconnectWallet} variant="outline" className="w-full">
           Disconnect
         </Button>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 };
 
 export default WalletConnection;

@@ -32,12 +32,12 @@ const CryptoSubscriptions: React.FC = () => {
         OrderByField: 'id',
         IsAsc: false,
         Filters: [
-          {
-            name: 'wallet_address',
-            op: 'Equal',
-            value: walletAddress,
-          },
-        ],
+        {
+          name: 'wallet_address',
+          op: 'Equal',
+          value: walletAddress
+        }]
+
       });
 
       if (error) throw new Error(error);
@@ -47,7 +47,7 @@ const CryptoSubscriptions: React.FC = () => {
       toast({
         title: 'Load Error',
         description: error.message || 'Failed to load subscriptions',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsLoading(false);
@@ -57,7 +57,7 @@ const CryptoSubscriptions: React.FC = () => {
   const handleWalletConnect = (address: string, walletProvider: ethers.BrowserProvider) => {
     setWalletAddress(address);
     setProvider(walletProvider);
-    
+
     // Get chain ID
     walletProvider.getNetwork().then((network) => {
       setChainId(Number(network.chainId));
@@ -117,8 +117,8 @@ const CryptoSubscriptions: React.FC = () => {
             <WalletConnection onWalletConnect={handleWalletConnect} />
           </div>
         </div>
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -142,8 +142,8 @@ const CryptoSubscriptions: React.FC = () => {
         </div>
 
         {/* Current Subscriptions */}
-        {subscriptions.length > 0 && (
-          <Card className="mb-8">
+        {subscriptions.length > 0 &&
+        <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5" />
@@ -152,8 +152,8 @@ const CryptoSubscriptions: React.FC = () => {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {subscriptions.map((sub) => (
-                  <Card key={sub.id} className="border-2">
+                {subscriptions.map((sub) =>
+              <Card key={sub.id} className="border-2">
                     <CardHeader>
                       <div className="flex items-center justify-between">
                         <CardTitle className="capitalize text-lg">{sub.plan_name}</CardTitle>
@@ -180,22 +180,22 @@ const CryptoSubscriptions: React.FC = () => {
                             {new Date(sub.start_date).toLocaleDateString()}
                           </span>
                         </div>
-                        {sub.end_date && (
-                          <div className="flex justify-between">
+                        {sub.end_date &&
+                    <div className="flex justify-between">
                             <span className="text-sm">Ends:</span>
                             <span className="text-xs">
                               {new Date(sub.end_date).toLocaleDateString()}
                             </span>
                           </div>
-                        )}
+                    }
                       </div>
                     </CardContent>
                   </Card>
-                ))}
+              )}
               </div>
             </CardContent>
           </Card>
-        )}
+        }
 
         {/* Subscription Tabs */}
         <Tabs defaultValue="superfluid" className="w-full">
@@ -214,16 +214,16 @@ const CryptoSubscriptions: React.FC = () => {
             <SuperfluidIntegration
               provider={provider}
               walletAddress={walletAddress}
-              chainId={chainId}
-            />
+              chainId={chainId} />
+
           </TabsContent>
           
           <TabsContent value="sablier" className="mt-6">
             <SablierIntegration
               provider={provider}
               walletAddress={walletAddress}
-              chainId={chainId}
-            />
+              chainId={chainId} />
+
           </TabsContent>
         </Tabs>
 
@@ -254,8 +254,8 @@ const CryptoSubscriptions: React.FC = () => {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default CryptoSubscriptions;

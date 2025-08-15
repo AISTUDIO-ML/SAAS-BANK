@@ -6,7 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import { Users, DollarSign, Activity, AlertTriangle, Search, Filter } from 'lucide-react';
+import StripeSetupGuide from '@/components/StripeSetupGuide';
+import AdminSubscriptionDashboard from '@/components/AdminSubscriptionDashboard';
+import { Users, DollarSign, Activity, AlertTriangle, Search, Filter, Key } from 'lucide-react';
 
 const Admin = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -114,12 +116,14 @@ const Admin = () => {
           </Card>
         </div>
 
-        <Tabs defaultValue="users" className="space-y-6">
-          <TabsList>
-            <TabsTrigger value="users">User Management</TabsTrigger>
-            <TabsTrigger value="streams">Stream Monitoring</TabsTrigger>
-            <TabsTrigger value="analytics">Platform Analytics</TabsTrigger>
-          </TabsList>
+        <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-5">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="users">Users</TabsTrigger>
+          <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
+          <TabsTrigger value="stripe-setup">Stripe Setup</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
 
           <TabsContent value="users" className="space-y-6">
             <Card>
@@ -225,6 +229,60 @@ const Admin = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+        <TabsContent value="stripe-setup" className="space-y-6">
+          <StripeSetupGuide />
+        </TabsContent>
+
+        <TabsContent value="subscriptions" className="space-y-6">
+          <AdminSubscriptionDashboard />
+        </TabsContent>
+
+        <TabsContent value="overview" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          </div>
+        </TabsContent>
+
+        <TabsContent value="settings" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Key className="w-5 h-5 mr-2" />
+                System Settings
+              </CardTitle>
+              <CardDescription>
+                Configure system-wide settings and preferences
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium mb-2">Environment Variables</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between p-3 bg-muted rounded-md">
+                      <div className="flex items-center">
+                        <Key className="w-4 h-4 mr-2" />
+                        <span className="text-sm">STRIPE_SECRET_KEY</span>
+                      </div>
+                      <Badge variant="destructive">
+                        Not Set
+                      </Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-muted rounded-md">
+                      <div className="flex items-center">
+                        <Key className="w-4 h-4 mr-2" />
+                        <span className="text-sm">VITE_STRIPE_PUBLISHABLE_KEY</span>
+                      </div>
+                      <Badge variant="destructive">
+                        Not Set
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

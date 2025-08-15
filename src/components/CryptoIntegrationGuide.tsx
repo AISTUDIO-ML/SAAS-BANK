@@ -4,16 +4,16 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { 
-  Code, 
-  ExternalLink, 
-  Zap, 
-  Lock, 
-  Shield, 
-  CheckCircle, 
+import {
+  Code,
+  ExternalLink,
+  Zap,
+  Lock,
+  Shield,
+  CheckCircle,
   AlertTriangle,
-  Copy
-} from 'lucide-react';
+  Copy } from
+'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const CryptoIntegrationGuide: React.FC = () => {
@@ -24,7 +24,7 @@ const CryptoIntegrationGuide: React.FC = () => {
     navigator.clipboard.writeText(text);
     toast({
       title: 'Copied',
-      description: `${label} copied to clipboard`,
+      description: `${label} copied to clipboard`
     });
   };
 
@@ -32,13 +32,13 @@ const CryptoIntegrationGuide: React.FC = () => {
     polygon: {
       superfluid: '0x3E14dC1b13c488a8d5D310918780c983bD5982E7',
       sablier: '0x14E673edD527Be681DEE7575Fb5a69BC9228e253',
-      usdt: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
+      usdt: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
     },
     ethereum: {
       superfluid: '0xEbdA4ceF883A7B12c4E669Ebc58927FBa8447C7D',
       sablier: '0xB10daee1FCF62243aE27776D7a92D39dC8740f95',
-      usdt: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-    },
+      usdt: '0xdAC17F958D2ee523a2206206994597C13D831ec7'
+    }
   };
 
   return (
@@ -166,12 +166,12 @@ const CryptoIntegrationGuide: React.FC = () => {
                     <h4 className="font-semibold">Install SDK</h4>
                     <div className="bg-gray-100 p-2 rounded mt-2 font-mono text-sm relative">
                       npm install @superfluid-finance/sdk-core
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
+                      <Button
+                        size="sm"
+                        variant="ghost"
                         className="absolute top-1 right-1 h-6 w-6 p-0"
-                        onClick={() => copyToClipboard('npm install @superfluid-finance/sdk-core', 'Command')}
-                      >
+                        onClick={() => copyToClipboard('npm install @superfluid-finance/sdk-core', 'Command')}>
+
                         <Copy className="h-3 w-3" />
                       </Button>
                     </div>
@@ -250,12 +250,12 @@ await createFlowOperation.exec(signer);`}
                     <h4 className="font-semibold">Install SDK</h4>
                     <div className="bg-gray-100 p-2 rounded mt-2 font-mono text-sm relative">
                       npm install @sablier/v2-sdk
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
+                      <Button
+                        size="sm"
+                        variant="ghost"
                         className="absolute top-1 right-1 h-6 w-6 p-0"
-                        onClick={() => copyToClipboard('npm install @sablier/v2-sdk', 'Command')}
-                      >
+                        onClick={() => copyToClipboard('npm install @sablier/v2-sdk', 'Command')}>
+
                         <Copy className="h-3 w-3" />
                       </Button>
                     </div>
@@ -438,8 +438,8 @@ const receipt = await tx.wait();`}
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 };
 
 export default CryptoIntegrationGuide;

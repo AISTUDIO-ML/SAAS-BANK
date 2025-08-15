@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SubscriptionCard from '@/components/SubscriptionCard';
-import { Wallet, TrendingUp, Activity, Plus, DollarSign } from 'lucide-react';
+import StripeSubscriptionManager from '@/components/StripeSubscriptionManager';
+import { Wallet, TrendingUp, Activity, Plus, DollarSign, CreditCard } from 'lucide-react';
 
 const Dashboard = () => {
   const mockSubscriptions = [
@@ -94,6 +95,7 @@ const Dashboard = () => {
         <Tabs defaultValue="subscriptions" className="space-y-6">
           <TabsList>
             <TabsTrigger value="subscriptions">My Subscriptions</TabsTrigger>
+            <TabsTrigger value="stripe">Credit Card Subscriptions</TabsTrigger>
             <TabsTrigger value="streams">Payment Streams</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
@@ -112,6 +114,10 @@ const Dashboard = () => {
               <SubscriptionCard key={index} {...sub} />
               )}
             </div>
+          </TabsContent>
+
+          <TabsContent value="stripe" className="space-y-6">
+            <StripeSubscriptionManager />
           </TabsContent>
 
           <TabsContent value="streams" className="space-y-6">

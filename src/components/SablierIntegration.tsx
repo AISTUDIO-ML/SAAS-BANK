@@ -27,7 +27,7 @@ interface TimeLockedStream {
 const SablierIntegration: React.FC<SablierIntegrationProps> = ({
   provider,
   walletAddress,
-  chainId,
+  chainId
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [streams, setStreams] = useState<TimeLockedStream[]>([]);
@@ -38,12 +38,12 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
   // Sablier V2 contract addresses
   const SABLIER_ADDRESSES = {
     137: '0x14E673edD527Be681DEE7575Fb5a69BC9228e253', // Polygon
-    1: '0xB10daee1FCF62243aE27776D7a92D39dC8740f95', // Ethereum
+    1: '0xB10daee1FCF62243aE27776D7a92D39dC8740f95' // Ethereum
   };
 
   const USDT_ADDRESSES = {
     137: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F', // Polygon USDT
-    1: '0xdAC17F958D2ee523a2206206994597C13D831ec7', // Ethereum USDT
+    1: '0xdAC17F958D2ee523a2206206994597C13D831ec7' // Ethereum USDT
   };
 
   const COMPANY_WALLET = '0x742d35Cc6634C0532925a3b8D8e01e5E8e2b6a9e';
@@ -51,10 +51,10 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
   const createTimeLockedStream = async (planType: 'annual' | 'quarterly' | 'custom') => {
     try {
       setIsLoading(true);
-      
+
       const sablierAddress = SABLIER_ADDRESSES[chainId as keyof typeof SABLIER_ADDRESSES];
       const usdtAddress = USDT_ADDRESSES[chainId as keyof typeof USDT_ADDRESSES];
-      
+
       if (!sablierAddress || !usdtAddress) {
         throw new Error('Sablier not supported on this network');
       }
@@ -63,13 +63,13 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
       const amounts = {
         annual: ethers.parseUnits('120', 6), // $120 for annual (10% discount)
         quarterly: ethers.parseUnits('90', 6), // $90 for quarterly (25% savings per quarter)
-        custom: ethers.parseUnits(customAmount || '100', 6),
+        custom: ethers.parseUnits(customAmount || '100', 6)
       };
 
       const durations = {
         annual: 365 * 24 * 60 * 60, // 1 year in seconds
         quarterly: 90 * 24 * 60 * 60, // 90 days in seconds
-        custom: selectedDuration * 24 * 60 * 60, // custom days in seconds
+        custom: selectedDuration * 24 * 60 * 60 // custom days in seconds
       };
 
       const amount = amounts[planType];
@@ -79,10 +79,10 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
 
       // Create Sablier stream contract interface
       const sablierABI = [
-        'function createWithTimestamps((address,bool,uint40,address,uint40,address,uint128)) external returns (uint256)',
-        'function withdraw(uint256,address,uint128) external',
-        'function cancel(uint256) external',
-      ];
+      'function createWithTimestamps((address,bool,uint40,address,uint40,address,uint128)) external returns (uint256)',
+      'function withdraw(uint256,address,uint128) external',
+      'function cancel(uint256) external'];
+
 
       const signer = await provider.getSigner();
       const sablierContract = new ethers.Contract(sablierAddress, sablierABI, signer);
@@ -90,7 +90,7 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
       // First approve USDT spending
       const usdtABI = ['function approve(address,uint256) external returns (bool)'];
       const usdtContract = new ethers.Contract(usdtAddress, usdtABI, signer);
-      
+
       const approveTx = await usdtContract.approve(sablierAddress, amount);
       await approveTx.wait();
 
@@ -102,25 +102,25 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
         timestamps: {
           start: startTime,
           cliff: startTime,
-          end: endTime,
+          end: endTime
         },
         recipient: COMPANY_WALLET,
         amounts: {
-          deposit: amount,
+          deposit: amount
         },
-        asset: usdtAddress,
+        asset: usdtAddress
       };
 
       // Note: This is a simplified version. The actual Sablier integration
       // requires more complex parameter handling
       const createTx = await sablierContract.createWithTimestamps([
-        walletAddress, // sender
-        true, // cancelable
-        startTime, // start
-        COMPANY_WALLET, // recipient
-        endTime, // end  
-        usdtAddress, // asset
-        amount, // amount
+      walletAddress, // sender
+      true, // cancelable
+      startTime, // start
+      COMPANY_WALLET, // recipient
+      endTime, // end  
+      usdtAddress, // asset
+      amount // amount
       ]);
 
       const receipt = await createTx.wait();
@@ -138,7 +138,7 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
         stream_id: streamId,
         start_date: new Date().toISOString(),
         end_date: new Date(endTime * 1000).toISOString(),
-        chain_id: chainId,
+        chain_id: chainId
       };
 
       const { error } = await window.ezsite.apis.tableCreate(34169, subscriptionData);
@@ -152,22 +152,22 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
         duration: duration / (24 * 60 * 60), // convert to days
         startTime: new Date(startTime * 1000),
         endTime: new Date(endTime * 1000),
-        status: 'active',
+        status: 'active'
       };
 
-      setStreams(prev => [...prev, newStream]);
-      
+      setStreams((prev) => [...prev, newStream]);
+
       toast({
         title: 'Time-Locked Stream Created',
-        description: `${planType} subscription locked for ${duration / (24 * 60 * 60)} days`,
+        description: `${planType} subscription locked for ${duration / (24 * 60 * 60)} days`
       });
-      
+
     } catch (error: any) {
       console.error('Error creating time-locked stream:', error);
       toast({
         title: 'Stream Creation Failed',
         description: error.message || 'Failed to create time-locked stream',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsLoading(false);
@@ -202,11 +202,11 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
                 <div className="text-sm text-muted-foreground mb-4">
                   Pay upfront for 12 months, funds locked until expiration
                 </div>
-                <Button 
+                <Button
                   onClick={() => createTimeLockedStream('annual')}
                   className="w-full"
-                  disabled={isLoading}
-                >
+                  disabled={isLoading}>
+
                   <Lock className="h-4 w-4 mr-2" />
                   Lock for 1 Year
                 </Button>
@@ -230,11 +230,11 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
                 <div className="text-sm text-muted-foreground mb-4">
                   Pay for 3 months upfront, funds locked for 90 days
                 </div>
-                <Button 
+                <Button
                   onClick={() => createTimeLockedStream('quarterly')}
                   className="w-full"
-                  disabled={isLoading}
-                >
+                  disabled={isLoading}>
+
                   <Lock className="h-4 w-4 mr-2" />
                   Lock for 90 Days
                 </Button>
@@ -256,8 +256,8 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
                     type="number"
                     placeholder="100"
                     value={customAmount}
-                    onChange={(e) => setCustomAmount(e.target.value)}
-                  />
+                    onChange={(e) => setCustomAmount(e.target.value)} />
+
                 </div>
                 <div>
                   <Label htmlFor="duration">Duration (days)</Label>
@@ -266,15 +266,15 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
                     type="number"
                     placeholder="30"
                     value={selectedDuration}
-                    onChange={(e) => setSelectedDuration(Number(e.target.value))}
-                  />
+                    onChange={(e) => setSelectedDuration(Number(e.target.value))} />
+
                 </div>
               </div>
-              <Button 
+              <Button
                 onClick={() => createTimeLockedStream('custom')}
                 className="w-full"
-                disabled={isLoading || !customAmount}
-              >
+                disabled={isLoading || !customAmount}>
+
                 <Lock className="h-4 w-4 mr-2" />
                 Create Custom Lock
               </Button>
@@ -284,15 +284,15 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
       </Card>
 
       {/* Active Streams */}
-      {streams.length > 0 && (
-        <Card>
+      {streams.length > 0 &&
+      <Card>
           <CardHeader>
             <CardTitle>Time-Locked Subscriptions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {streams.map((stream) => (
-                <div key={stream.id} className="flex items-center justify-between p-4 border rounded">
+              {streams.map((stream) =>
+            <div key={stream.id} className="flex items-center justify-between p-4 border rounded">
                   <div>
                     <div className="font-medium">${stream.amount} USDT</div>
                     <div className="text-sm text-muted-foreground">
@@ -302,10 +302,10 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
                       Ends: {stream.endTime.toLocaleDateString()}
                     </div>
                     <Badge variant={
-                      stream.status === 'active' ? 'default' : 
-                      stream.status === 'completed' ? 'secondary' : 
-                      'outline'
-                    }>
+                stream.status === 'active' ? 'default' :
+                stream.status === 'completed' ? 'secondary' :
+                'outline'
+                }>
                       {stream.status}
                     </Badge>
                   </div>
@@ -313,20 +313,20 @@ const SablierIntegration: React.FC<SablierIntegrationProps> = ({
                     <div className="text-sm font-medium">
                       To: {stream.recipient.slice(0, 6)}...{stream.recipient.slice(-4)}
                     </div>
-                    {stream.status === 'active' && (
-                      <div className="text-xs text-green-600">
+                    {stream.status === 'active' &&
+                <div className="text-xs text-green-600">
                         Streaming...
                       </div>
-                    )}
+                }
                   </div>
                 </div>
-              ))}
+            )}
             </div>
           </CardContent>
         </Card>
-      )}
-    </div>
-  );
+      }
+    </div>);
+
 };
 
 export default SablierIntegration;
